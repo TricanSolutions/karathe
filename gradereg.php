@@ -12,13 +12,20 @@ if (array_key_exists("gradeadd", $_POST)) {
     $Examiner = $_POST['Examiner'];
     $status = $_POST['status'];
 
-    $q1="SELECT id FROM student "
-$query = "SELECT * FROM gradings";//    print_r($_POST);
-//    echo $status;
-//    echo '"dfdfdfd"'.$name;
 //    
-//    
-//    
+    $quarynew="SELECT student.id FROM student WHERE name_with_initials=''{$fname}'";
+    
+     $data1 = array();
+    $result2 =  mysqli_query($con,$querynew);
+ while ($row = mysqli_fetch_assoc($result)) {
+            $data1[] = $row;
+            //print_r($row);
+        }
+        echo json_encode($data1);
+    
+   
+    
+    
     $query = "INSERT INTO gradings (student_id,grade,result,examiner,status) VALUES ('{$studid} ',' {$Grade} ',' {$Result} ',' {$Examiner} ','{$status} ')";
 
     $result = mysqli_query($con, $query)or die(mysqli_error());
@@ -121,6 +128,7 @@ $query = "SELECT * FROM student";
 $result =  mysqli_query($con,$query);
  while ($row = mysqli_fetch_assoc($result)) {
             $data[] = $row;
+           
         }
         echo json_encode($data);
     
