@@ -40,13 +40,14 @@
         <link href="css/log.css" rel="stylesheet">   
         <link href="css/potoup.css" rel="stylesheet">
         <link href="css/datepicker.css" rel="stylesheet">
-             
+              <link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
          <!-- Include JS File Here -->
         
          <script src="js/jquery-1.7.1.min.js"></script>
          <script src="js/alertify.js"></script>
          <script src="js/mysystem.js" ></script>
          <script src="js/potoup.js"></script>
+         <script src="dist/sweetalert.min.js"></script>
         
   
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

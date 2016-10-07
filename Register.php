@@ -285,9 +285,23 @@ session_start();
                 });
             
 
-// Function to preview image after validation
-                $(function () {
-                    $("#file").change(function () {
+ //----------------------enter press---------------------------------------------
+            $(".form-control").keyup(function (event) {
+                if (event.keyCode == 13) {
+                    textboxes = $("input.form-control");
+                    currentBoxNumber = textboxes.index(this);
+                    if (textboxes[currentBoxNumber + 1] != null) {
+                        nextBox = textboxes[currentBoxNumber + 1];
+                        nextBox.focus();
+                        nextBox.select();
+                    }
+                    event.preventDefault();
+                    return false;
+                }
+            });
+// -----------------------Function to preview image after validation------------                      
+        $(function () {           
+        $("#file").change(function () {
                         $("#message").empty(); // To remove the previous error message
                         var file = this.files[0];
                         var imagefile = file.type;
@@ -316,21 +330,10 @@ session_start();
                 }
                 ;
             });
-
-
-
-
-
-
-
-//---------------------****-----------------
-
-
-
         });
 
 //-----------------photo upload + add data----------------------------------------------
-//
+
         function upload() {
  var currentdate = new Date();
             var datetime = +currentdate.getFullYear() + "-"
@@ -350,6 +353,50 @@ session_start();
             var dojoname = $("#dojoname").val();
             var Grade = $("#Grade").val();
             var status = $("#status").val();
+            
+               if (fname == "" || memno == "" || street1 == "" || street2 == "" || City == "" || DOB == "" || dojoname == "" || Grade == "" || status == "")
+                {
+                    if (fname == "")
+                    {
+                        $("#fname").css('border-color', 'red');
+                    }
+                    if (memno == "")
+                    {
+                        $("#memno").css('border-color', 'red');
+                    }
+                    if (street1 == "")
+                    {
+                        $("#street1").css('border-color', 'red');
+                    }
+                    if (street2 == "")
+                    {
+                        $("#street2").css('border-color', 'red');
+                    }
+                    if (City == "")
+                    {
+                        $("#City").css('border-color', 'red');
+                    }
+                    if (DOB == "")
+                    {
+                        $("#DOB").css('border-color', 'red');
+                    }
+                    if (dojoname == "")
+                    {
+                        $("#dojoname").css('border-color', 'red');
+                    }
+                    if (Grade == "")
+                    {
+                        $("#Grade").css('border-color', 'red');
+                    }
+                    
+                    if (status == "")
+                    {
+                        $("#status").css('border-color', 'red');
+                    }
+                }
+                
+            
+            
             if (upld.files.length > 0) {
                 //alert('ok');
 
@@ -398,84 +445,102 @@ session_start();
             }
         }
 
-//        function readURL(input) {
-//            if (input.files && input.files[0]) {
-//                var reader = new FileReader();
-//                reader.onload = function (e) {
-//                    $('.preview').attr('src', e.target.result);
-//                }
-//                reader.readAsDataURL(input.files[0]);
-//            }
-//        }
-//
-//        $("#file").change(function () {
-//            readURL(this);
-//        });
-//
-
-
-
-
 $('#add').click(function(e){
     upload();
-     
-                                
+                                   
 });
 
-        $("#add1").click(function () {
 
-            var fname = $("#fname").val();
-            var memno = $("#memno").val();
-            var street1 = $("#street1").val();
-            var street2 = $("#street2").val();
-            var City = $("#City").val();
-            var DOB = $("#DOB").val();
-            var dojoname = $("#dojoname").val();
-            var Grade = $("#Grade").val();
-            var status = $("#status").val();
-
-            var currentdate = new Date();
-            var datetime = +currentdate.getFullYear() + "-"
-                    + (currentdate.getMonth() + 1) + "-"
-                    + currentdate.getDate() + " "
-                    + currentdate.getHours() + ":"
-                    + currentdate.getMinutes() + ":"
-                    + currentdate.getSeconds();
-
-//alert(datetime);
-            //var status =  $("#sell option:selected").val();
-            //                if (name == "" || status == "")
-            //                {
-            //                    alertify.error("Fill", 1000);
-            //                }
-            //                else {
-
-            $.ajax({
-                type: 'POST',
-                datatype: 'JSON',
-                url: "EmpReg.php",
-                data: {studadd: 'studadd', fname: fname, memno: memno, street1: street1, street2: street2, City: City, DOB: DOB, dojoname: dojoname, datetime: datetime, Grade: Grade, status: status},
-                success: function (data) {
-
-                    //getstudent();
-                    //clear()
-                    if (data == "1") {
-                        //alert("succes");
-                        alertify.success("save", 1000);
-                        getcat();
-                        upload();
-                        //alertify.success("Success log message");
-                        clear();
-
-                    } else {
-                        alertify.error("Error Occured", 1000);
-                        //alertify.error("Error log message");
-                        //alert("fail")
-                    }
-                }
+ //-------------------------text field color change------------------------------
+            $('#fname').on('keyup', function () {
+                $('#fname').css({'border-color': ' #ccc'});
             });
 
-        });
+            $('#memno ').on('keyup', function () {
+                $('#memno ').css({'border-color': ' #ccc'});
+            });
+
+            $('#street1 ').on('keyup', function () {
+                $('#street1 ').css({'border-color': ' #ccc'});
+            });
+
+            $('#street2 ').on('keyup', function () {
+                $('#street2 ').css({'border-color': ' #ccc'});
+            });
+
+            $('#City ').on('keyup', function () {
+                $('#City ').css({'border-color': ' #ccc'});
+            });
+
+            $('#DOB ').on('keyup', function () {
+                $('#DOB ').css({'border-color': ' #ccc'});
+            });
+
+            $('#dojoname ').on('keyup', function () {
+                $('#dojoname ').css({'border-color': ' #ccc'});
+            });
+
+            $('#Grade ').on('keyup', function () {
+                $('#Grade ').css({'border-color': ' #ccc'});
+            });
+
+            $('#status').on('keyup' , function () {
+                $('#status').css({'border-color': ' #ccc'});
+            });
+//        $("#add1").click(function () {
+//
+//            var fname = $("#fname").val();
+//            var memno = $("#memno").val();
+//            var street1 = $("#street1").val();
+//            var street2 = $("#street2").val();
+//            var City = $("#City").val();
+//            var DOB = $("#DOB").val();
+//            var dojoname = $("#dojoname").val();
+//            var Grade = $("#Grade").val();
+//            var status = $("#status").val();
+//
+//            var currentdate = new Date();
+//            var datetime = +currentdate.getFullYear() + "-"
+//                    + (currentdate.getMonth() + 1) + "-"
+//                    + currentdate.getDate() + " "
+//                    + currentdate.getHours() + ":"
+//                    + currentdate.getMinutes() + ":"
+//                    + currentdate.getSeconds();
+//
+////alert(datetime);
+//            //var status =  $("#sell option:selected").val();
+//            //                if (name == "" || status == "")
+//            //                {
+//            //                    alertify.error("Fill", 1000);
+//            //                }
+//            //                else {
+//
+//            $.ajax({
+//                type: 'POST',
+//                datatype: 'JSON',
+//                url: "EmpReg.php",
+//                data: {studadd: 'studadd', fname: fname, memno: memno, street1: street1, street2: street2, City: City, DOB: DOB, dojoname: dojoname, datetime: datetime, Grade: Grade, status: status},
+//                success: function (data) {
+//
+//                    //getstudent();
+//                    //clear()
+//                    if (data == "1") {
+//                        //alert("succes");
+//                        alertify.success("save", 1000);
+//                        getcat();
+//                        upload();
+//                        //alertify.success("Success log message");
+//                        clear();
+//
+//                    } else {
+//                        alertify.error("Error Occured", 1000);
+//                        //alertify.error("Error log message");
+//                        //alert("fail")
+//                    }
+//                }
+//            });
+//
+//        });
         
         function updatelog(id){
            console.log(id)
@@ -555,7 +620,8 @@ $("#previewing").attr("title","img/image.png")
 
 
             } else {
-                alert('no image');
+//                alert('no image');
+               swal({   title: "Error!",   text: "Here's my error message!",   type: "error",   confirmButtonText: "Cool" });
             }
         }
 
@@ -566,57 +632,57 @@ $("#up").click(function () {
 });
 
 //-------------------------------------------------update-----------------------
-        $("#up2").click(function () {
-            var id = $("#sid").val();
-            var fname = $("#fname").val();
-            var memno = $("#memno").val();
-            var street1 = $("#street1").val();
-            var street2 = $("#street2").val();
-            var City = $("#City").val();
-            var DOB = $("#DOB").val();
-            var dojoname = $("#dojoname").val();
-            var Grade = $("#Grade").val();
-            var status = $("#status").val();
-
-            var currentdate = new Date();
-            var uptime = +currentdate.getFullYear() + "-"
-                    + (currentdate.getMonth() + 1) + "-"
-                    + currentdate.getDate() + " "
-                    + currentdate.getHours() + ":"
-                    + currentdate.getMinutes() + ":"
-                    + currentdate.getSeconds();
-            //var status =  $("#sell option:selected").val();
-            //                if (name == "" || status == "")
-            //                {
-            //                    alertify.error("Fill", 1000);
-            //                }
-            //                else {
-            $.ajax({
-                type: 'POST',
-                datatype: 'JSON',
-                url: "EmpReg.php",
-                data: {studup: 'studup', id: id, fname: fname, memno: memno, street1: street1, street2: street2, City: City, DOB: DOB, dojoname: dojoname, uptime: uptime, Grade: Grade, status: status},
-                success: function (data) {
-
-                    $('input[type=text]').val('');
-                    getcat();
-                    //clear()
-                    if (data == "1") {
-                        //alert("succes");
-                        alertify.success("Updates", 1000);
-                        getcat();
-                        //alertify.success("Success log message");
-                        //clear();
-                    } else {
-                        alertify.error("Error Occured", 1000);
-                        //alertify.error("Error log message");
-                        //alert("fail")
-                    }
-                }
-            });
-
-        });
-
+//        $("#up2").click(function () {
+//            var id = $("#sid").val();
+//            var fname = $("#fname").val();
+//            var memno = $("#memno").val();
+//            var street1 = $("#street1").val();
+//            var street2 = $("#street2").val();
+//            var City = $("#City").val();
+//            var DOB = $("#DOB").val();
+//            var dojoname = $("#dojoname").val();
+//            var Grade = $("#Grade").val();
+//            var status = $("#status").val();
+//
+//            var currentdate = new Date();
+//            var uptime = +currentdate.getFullYear() + "-"
+//                    + (currentdate.getMonth() + 1) + "-"
+//                    + currentdate.getDate() + " "
+//                    + currentdate.getHours() + ":"
+//                    + currentdate.getMinutes() + ":"
+//                    + currentdate.getSeconds();
+//            //var status =  $("#sell option:selected").val();
+//            //                if (name == "" || status == "")
+//            //                {
+//            //                    alertify.error("Fill", 1000);
+//            //                }
+//            //                else {
+//            $.ajax({
+//                type: 'POST',
+//                datatype: 'JSON',
+//                url: "EmpReg.php",
+//                data: {studup: 'studup', id: id, fname: fname, memno: memno, street1: street1, street2: street2, City: City, DOB: DOB, dojoname: dojoname, uptime: uptime, Grade: Grade, status: status},
+//                success: function (data) {
+//
+//                    $('input[type=text]').val('');
+//                    getcat();
+//                    //clear()
+//                    if (data == "1") {
+//                        //alert("succes");
+//                        alertify.success("Updates", 1000);
+//                        getcat();
+//                        //alertify.success("Success log message");
+//                        //clear();
+//                    } else {
+//                        alertify.error("Error Occured", 1000);
+//                        //alertify.error("Error log message");
+//                        //alert("fail")
+//                    }
+//                }
+//            });
+//
+//        });
+//
 
 
 
@@ -650,14 +716,10 @@ $("#up").click(function () {
                             $('#status').val(1);
                         } else {
                             $('#status').val(0);
-
                         }
                     });
                 }
-
             });
-
-
         }
 //-------------------delete-------------------------------------------------------
         function del(id) {

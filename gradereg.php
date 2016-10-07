@@ -34,6 +34,7 @@ if (array_key_exists("gradeup", $_POST)) {
             SET 
             student_id = '{$_POST['studid']}',
             grade = '{$_POST['Grade']}',
+            tested_on='{$_POST['tdate']}',
             result = '{$_POST['Result']}',
             examiner = '{$_POST['Examiner']}',
             status = '{$_POST['status']}'
@@ -70,7 +71,7 @@ if (array_key_exists("fill", $_POST)) {
 gradings.id,
 gradings.student_id,
 gradings.grade,
-gradings.tested_on
+gradings.tested_on,
 gradings.result,
 gradings.examiner,
 gradings.status

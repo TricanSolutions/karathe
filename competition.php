@@ -19,7 +19,7 @@ session_start();
         <div id="wrapper">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-11" style="padding-left: 90px;">
+                    <div class="col-lg-10" style="padding-left: 90px;">
                         <h3 style="color: #0072c6; position: absolute; left: 100px; top: -10px;">Competition</h3>
                         <br>
                         <br>
@@ -65,14 +65,17 @@ session_start();
                             <!-- <div class="container">
                                 <div class="row">
                                     <div class='col-sm-6'>-->
-                            <div class="form-group form_datetime">
-                                <label class="control-label col-sm-3" for="date">Date:&nbsp;&nbsp;</label>
+                           <div class="form-group">
+                                <label class="control-label col-sm-3" for="tdate">Competition Date:&nbsp;&nbsp;</label>
                                 <div class="col-sm-5">
-                                    <div class="input-append date ">
-                                        <input size="16" type="text" value="" id="date" readonly>
-                                        <span class="add-on"><i class="icon-th"></i></span>
+                                    <div  class='input-group date' >
+                                        <input  type='text' class="form-control" id="tdate" date-date-format ="yyyy-mm-dd"/>
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
                                     </div>
-
+                                </div>
+                            </div>
 
 
                                     <!--                                        <div  class='input-group date' id='date'>
@@ -80,9 +83,8 @@ session_start();
                                                                                 <span class="input-group-addon">
                                                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                                                 </span>
-                                                                            </div>-->
-                                </div>
-                            </div>
+                         <!--</div>-->
+                            <!--</div>-->
 
 
 
@@ -211,7 +213,7 @@ session_start();
                 
             });
             
-            $("#date").datepicker({
+            $("#tdate").datepicker({
                     format: "yyyy-mm-dd",
                     autoclose: true,
                     todayBtn: true,
@@ -222,7 +224,7 @@ session_start();
 
                 var studid = $("#studid").val();
                 var comname = $("#comname").val();
-                var date = $("#date").val();
+                var tdate = $("#tdate").val();
                 var comgrade = $("#comgrade").val();
                 var place = $("#place").val();
                 var comstatus = $("#comstatus").val();
@@ -236,7 +238,7 @@ session_start();
                     type: 'POST',
                     datatype: 'JSON',
                     url: "competitionreg.php",
-                    data: {comadd: 'comadd', studid: studid, comname: comname, date: date, comgrade: comgrade, place: place, comstatus: comstatus},
+                    data: {comadd: 'comadd', studid: studid, comname: comname, tdate: tdate, comgrade: comgrade, place: place, comstatus: comstatus},
                     success: function (data) {
 
                         //getstudent();
@@ -297,7 +299,7 @@ session_start();
                             $("#sid").val(data.id);
                             $("#studid").val(data.student_id);
                             $("#comname").val(data.name_of_competition);
-                            // $("#date").val(data.competition_date);
+                             $("#tdate").val(data.competition_date);
                             $("#comgrade").val(data.grade);
                             $("#place").val(data.palce);
                             $("#comstatus").val(data.status);
@@ -323,7 +325,7 @@ session_start();
                 var id = $("#sid").val();
                 var studid = $("#studid").val();
                 var comname = $("#comname").val();
-                var date = $("#date").val();
+                var tdate = $("#tdate").val();
                 var comgrade = $("#comgrade").val();
                 var place = $("#place").val();
                 var comstatus = $("#comstatus").val();
@@ -332,7 +334,7 @@ session_start();
                     type: 'POST',
                     datatype: 'JSON',
                     url: "competitionreg.php",
-                    data: {gradeup: 'gradeup', id: id, studid: studid, comname: comname, date: date, comgrade: comgrade, place: place, comstatus: comstatus},
+                    data: {gradeup: 'gradeup', id: id, studid: studid, comname: comname, tdate: tdate, comgrade: comgrade, place: place, comstatus: comstatus},
                     success: function (data) {
 
                         $('input[type=text]').val('');

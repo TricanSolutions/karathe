@@ -19,7 +19,7 @@ session_start();
         <div id="wrapper">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-11" style="padding-left: 90px;">
+                    <div class="col-lg-10" style="padding-left: 90px;">
                         <h3 style="color: #0072c6; position: absolute; left: 100px; top: -10px;">Grading</h3>
                         <br>
                         <br>
@@ -185,6 +185,8 @@ session_start();
                         </div>
                     </div>
                 </div>
+                
+                
             </div>
 
         </div>
@@ -223,7 +225,7 @@ session_start();
             });
 //-----------------------------add---------------------------------------------                   
             $("#gradeadd").click(function () {
-
+                
                 var studid = $("#studid").val();
                 var Grade = $("#Grade").val();
                 var tdate = $("#tdate").val();

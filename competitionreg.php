@@ -7,7 +7,7 @@ if (array_key_exists("comadd", $_POST)) {
     //$id = $_POST['id'];
     $studid=$_POST['studid'];
     $comname = $_POST['comname'];
-    //$date = $_POST['date'];
+    $date = $_POST['tdate'];
     $comgrade = $_POST['comgrade'];
     $place= $_POST['place'];
     $comstatus = $_POST['comstatus'];
@@ -17,7 +17,7 @@ if (array_key_exists("comadd", $_POST)) {
 //    echo '"dfdfdfd"'.$name;
 //    
 //    
-    $query = "INSERT INTO competition (student_id,name_of_competition,grade,palce,status) VALUES ('{$studid} ',' {$comname} ','{$comgrade} ',' {$place} ','{$comstatus} ')";
+    $query = "INSERT INTO competition (student_id,name_of_competition,competition_date,grade,palce,status) VALUES ('{$studid} ',' {$comname} ',' {$date} ','{$comgrade} ',' {$place} ','{$comstatus} ')";
 
     $result=  mysqli_query($con,$query)or die(mysqli_error());
    
@@ -40,6 +40,7 @@ if (array_key_exists("gradeup", $_POST)) {
             
             student_id = '{$_POST['studid']}',
             name_of_competition = '{$_POST['comname']}',
+            competition_date='{$_POST['tdate']}',
             grade = '{$_POST['comgrade']}',
             palce = '{$_POST['place']}',
             status='{$_POST['comstatus']}' 
@@ -56,9 +57,9 @@ if (array_key_exists("gradeup", $_POST)) {
 
         echo 0;
     }
-}
-//-----------------------load table---------------------------------------------
-if (array_key_exists("loadcom", $_POST)) {
+}//-----------------------load table---------------------------------------------
+if
+ (array_key_exists("loadcom", $_POST)) {
 
     $query = "SELECT * FROM competition";
     
@@ -76,6 +77,7 @@ if (array_key_exists("fill", $_POST)) {
 competition.id,
 competition.student_id,
 competition.name_of_competition,
+competition.competition_date,
 competition.grade,
 competition.palce,
 competition.status
