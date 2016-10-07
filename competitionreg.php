@@ -111,6 +111,20 @@ if (array_key_exists("del", $_POST)) {
         echo 0;
     }
 }
+//--------------------load studen drp------------------------------------------
+if (array_key_exists("loaddrop", $_POST)) {
+   
+  $data = array();
+
+$query = "SELECT id,name_with_initials FROM student";
+
+$result =  mysqli_query($con,$query);
+ while ($row = mysqli_fetch_assoc($result)) {
+            $data[] = $row;
+        }
+        echo json_encode($data);
+    
+   }
 //----------------LOGGING-----------------------------
 //---------------------logging--------------------------------------------------
 

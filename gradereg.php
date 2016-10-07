@@ -5,21 +5,15 @@ include './connection.php';
 if (array_key_exists("gradeadd", $_POST)) {
 //    print_r($_POST);
     //$id = $_POST['id'];
-    $studname = $_POST['studname'];
+    $studid = $_POST['studid'];
     $Grade = $_POST['Grade'];
-//    $tdate = $_POST['tdate'];
+    $tdate = $_POST['tdate'];
     $Result = $_POST['Result'];
     $Examiner = $_POST['Examiner'];
     $status = $_POST['status'];
 
-    $q1="SELECT id FROM student "
-$query = "SELECT * FROM gradings";//    print_r($_POST);
-//    echo $status;
-//    echo '"dfdfdfd"'.$name;
-//    
-//    
-//    
-    $query = "INSERT INTO gradings (student_id,grade,result,examiner,status) VALUES ('{$studid} ',' {$Grade} ',' {$Result} ',' {$Examiner} ','{$status} ')";
+
+    $query = "INSERT INTO gradings (student_id,grade,tested_on,result,examiner,status) VALUES ('{$studid} ',' {$Grade} ','{$tdate}',' {$Result} ',' {$Examiner} ','{$status} ')";
 
     $result = mysqli_query($con, $query)or die(mysqli_error());
 
@@ -76,6 +70,7 @@ if (array_key_exists("fill", $_POST)) {
 gradings.id,
 gradings.student_id,
 gradings.grade,
+gradings.tested_on
 gradings.result,
 gradings.examiner,
 gradings.status
@@ -116,7 +111,7 @@ if (array_key_exists("loaddrop", $_POST)) {
    
   $data = array();
 
-$query = "SELECT * FROM student";
+$query = "SELECT id,name_with_initials FROM student";
 
 $result =  mysqli_query($con,$query);
  while ($row = mysqli_fetch_assoc($result)) {

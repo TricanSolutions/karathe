@@ -58,7 +58,7 @@ if (array_key_exists("studup", $_POST)) {
             
             
 // alert (grade);
-    $result = mysqli_query($con, $sql5)or die(mysqli_error());
+    $result = mysqli_query($con, $sql5);
     //echo 'sssssssssssssssssssss';
    // echo grade;
     if ($result) {

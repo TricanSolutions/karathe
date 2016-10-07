@@ -29,10 +29,11 @@ session_start();
                             <div class="form-group">
                                 <label class="control-label col-sm-3" for="status">Student Name:&nbsp;&nbsp;</label>
                                 <div class="col-sm-5">
-                                    <select class="form-control" id="studname">
+                                    <select class="form-control" id="studid">
 
                                     </select>
                                 </div>
+                                <input type="hidden" class="form-control" id="sid" placeholder="" >
                             </div>
 
                             <!--                            <div class="form-group">
@@ -80,14 +81,16 @@ session_start();
                             <div class="form-group">
                                 <label class="control-label col-sm-3" for="tdate">Test Date:&nbsp;&nbsp;</label>
                                 <div class="col-sm-5">
-                                    <div  class='input-group date' id='tdate'>
-                                        <input  type='text' class="form-control" id="tdate"/>
+                                    <div  class='input-group date' >
+                                        <input  type='text' class="form-control" id="tdate" date-date-format ="yyyy-mm-dd"/>
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
                                     </div>
                                 </div>
                             </div>
+                            
+                                      
 
 
 
@@ -208,6 +211,15 @@ session_start();
                 // $('#datetimepicker1').datetimepicker();
 
                 // $("#input-4").fileinput({showCaption: false});
+                
+                ///////////////////////////////////////////////////////////////////
+//                datepicker
+     $("#tdate").datepicker({
+                    format: "yyyy-mm-dd",
+                    autoclose: true,
+                    todayBtn: true,
+                    pickerPosition: "bottom-left"
+                });
             });
 //-----------------------------add---------------------------------------------                   
             $("#gradeadd").click(function () {
@@ -219,12 +231,6 @@ session_start();
                 var Examiner = $("#Examiner").val();
                 var status = $("#status").val();
 
-                //var status =  $("#sell option:selected").val();
-                //                if (name == "" || status == "")
-                //                {
-                //                    alertify.error("Fill", 1000);
-                //                }
-                //                else {
                 $.ajax({
                     type: 'POST',
                     datatype: 'JSON',
@@ -289,7 +295,7 @@ session_start();
                             $("#sid").val(data.id);
                             $("#studid").val(data.student_id);
                             $("#Grade").val(data.grade);
-                            //$("#tdate").val(data.);
+                            $("#tdate").val(data.tested_on);
                             $("#Result").val(data.result);
                             $("#Examiner").val(data.examiner);
                             $("#status").val(data.status);
@@ -329,7 +335,7 @@ session_start();
                     success: function (data) {
 
                         $('input[type=text]').val('');
-                        getgrade();
+                       // getgrade();
                         //clear()
                         if (data == "1") {
                             //alert("succes");
@@ -393,14 +399,14 @@ session_start();
                     if (e.length === 0 || e === null) {
                         comdata = '<option value="">--No Data--</option>'
 
-                        $('#studname').html('').append(comdata);
+                        $('#studid').html('').append(comdata);
                     } else
                     {
                         $.each(e, function (index, data) {
 
                             comdata += '<option value="' + data.id + '">' + data.name_with_initials + '</option>';
                         });
-                        $('#studname').html('').append(comdata);
+                        $('#studid').html('').append(comdata);
                     }
 
                 }, "json");

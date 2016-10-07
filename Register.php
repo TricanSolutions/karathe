@@ -163,7 +163,7 @@ session_start();
                             <hr id="line">
                             <div id="selectImage">
                                 <label>Select Your Image</label><br/>
-                                <input type="file" name="file" id="file" required />
+                                <input type="file" title="load" name="file" id="file" required />
                                 <!--<input type="submit" value="Upload" class="submit" />-->
                             </div>
                         </form>
@@ -274,6 +274,16 @@ session_start();
                         }
                     });
                 }));
+                
+                ///////////////////////////////////////////////////////////////////
+//                datepicker
+     $("#datetimepicker1").datepicker({
+                    format: "yyyy-mm-dd",
+                    autoclose: true,
+                    todayBtn: true,
+                    pickerPosition: "bottom-left"
+                });
+            
 
 // Function to preview image after validation
                 $(function () {
@@ -373,7 +383,7 @@ session_start();
                             if (status == 0) {
                                 alertify.success('succesfully Data saved', 1000);
                                  getcat();
-                                
+                                clear();
                             }
                             else {
 
@@ -408,7 +418,7 @@ session_start();
 
 $('#add').click(function(e){
     upload();
-     clear();
+     
                                 
 });
 
@@ -466,11 +476,18 @@ $('#add').click(function(e){
             });
 
         });
+        
+        function updatelog(id){
+           console.log(id)
+            
+        }
 
 //----------------update poto + data------------------------------------------
       function update() {
+          
+          
  var currentdate = new Date();
-            var datetime = +currentdate.getFullYear() + "-"
+            var uptime = +currentdate.getFullYear() + "-"
                     + (currentdate.getMonth() + 1) + "-"
                     + currentdate.getDate() + " "
                     + currentdate.getHours() + ":"
@@ -505,12 +522,12 @@ $('#add').click(function(e){
                     formdata.append('dojoname', dojoname);
                     formdata.append('Grade', Grade);
                     formdata.append('status', status);
-                    formdata.append('datetime', datetime);
+                    formdata.append('uptime', uptime);
                     formdata.append('file', upld.files[0]);
 
 
                     $.ajax({
-                        url: 'imgeupload.php',
+                        url: 'imageupdateinfo.php',
                         type: 'POST',
                         data: formdata,
                         processData: false,
@@ -519,12 +536,18 @@ $('#add').click(function(e){
 
                             var status = parseInt(res);
                             if (status == 0) {
+                                updatelog(id);
+                                
                                 alertify.success('succesfully Data Updated', 1000);
+                                
                                  getcat();
+                                 clear();
                                 
                             }
-                            else {
-
+                            else if(status == 800){
+ alertify.error('file type error', 1000);
+  var image =$("#previewing").attr("src","img/image.png")
+$("#previewing").attr("title","img/image.png")
                             }
                         }
                     });
@@ -536,14 +559,14 @@ $('#add').click(function(e){
             }
         }
 
-$("#up1").click(function () {
+$("#up").click(function () {
     
   update();  
     
 });
 
 //-------------------------------------------------update-----------------------
-        $("#up").click(function () {
+        $("#up2").click(function () {
             var id = $("#sid").val();
             var fname = $("#fname").val();
             var memno = $("#memno").val();
@@ -583,7 +606,7 @@ $("#up1").click(function () {
                         alertify.success("Updates", 1000);
                         getcat();
                         //alertify.success("Success log message");
-                        clear();
+                        //clear();
                     } else {
                         alertify.error("Error Occured", 1000);
                         //alertify.error("Error log message");
@@ -707,7 +730,7 @@ $("#up1").click(function () {
             var dojoname = $("#dojoname").val("");
             var Grade = $("#Grade").val("");
             var status = $("#status").val("");
-            var image =$('#previewing').attr("");
+            var image =$("#previewing").attr("src","img/image.png");
 
         }
         //------------------------log out------------------------------------------------
