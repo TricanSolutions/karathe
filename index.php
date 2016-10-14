@@ -33,7 +33,7 @@
                             <span class="input-group-addon">
                                 <i class="glyphicon glyphicon-user" style="width: auto"></i>
                             </span>
-                            <input  id="usname" runat="server" type="text" class="form-control" name="user" placeholder="User Name" required="" />
+                            <input  id="usname" runat="server" type="text" class="form-control" name="user" autofocus="autofocus" placeholder="User Name" required="" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -74,11 +74,15 @@
   	login successful <br />
     redirecting...
   </div>
-  
-</div>-->
+</div>
+   <?php
+    include './FooterImports.php';
+    include './footer.php';
+    ?>
+
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 
-       <!--<script src="js/index.js"></script>-->
+     <!--<script src="js/index.js"></script>-->
         
   <script type="text/javascript">
 
@@ -123,7 +127,7 @@
                         alertify.success(loging.msg, 1000);
                         
                         
-                     timelyRedirect('Register.php',1000);
+                     timelyRedirect('dashboard.php',1000);
          
 //                        timelyRedirect('https://www.google.lk',1000)
 //                        setTimeout(function(){

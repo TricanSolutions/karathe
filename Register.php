@@ -28,8 +28,8 @@ session_start();
                             <div class="form-group">
                                 <label class="control-label col-sm-3"  for="inputsm" >Name with Initials:&nbsp;&nbsp;</label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" id="fname" placeholder="Enter Name with Initials" >
-                                    <input type="hidden" class="form-control" id="sid" placeholder="" >
+                                    <input type="text" class="form-control" id="fname" autofocus="autofocus" placeholder="Enter Name with Initials" >
+                                    <input type="hidden" id="sid" placeholder="" >
 
                                 </div>
                             </div>
@@ -165,8 +165,11 @@ session_start();
                                 <label>Select Your Image</label><br/>
                                 <input type="file" title="load" name="file" id="file" required />
                                 <!--<input type="submit" value="Upload" class="submit" />-->
+                                <!--<h6 id="selc" style="color: red"> </h6>-->
+                                <input type="lable" class="form-control" id="select" placeholder="Enter Grade">
                             </div>
                         </form>
+
                     </div>
                     <div class="row">
                         <h4 id='loading' >loading..</h4>
@@ -215,7 +218,7 @@ session_start();
                                             <th>Create time</th>
                                             <th>Update time</th>                                       
                                             <th>Status</th>
-                                            <th>Edit / Delete</th>
+                                            <th>Edit</th>
                                         </tr>
                                     </thead>
                                     <tbody>                                                             
@@ -247,7 +250,8 @@ session_start();
         $(document).ready(function () {
             getcat();
             $("#up").hide();
-           // $('#datetimepicker1').datepicker()
+            $("#select").hide();
+            // $('#datetimepicker1').datepicker()
             //comboload();
             // $('#datetimepicker1').datetimepicker();
 
@@ -255,6 +259,9 @@ session_start();
 //------------newwwww--****-----------------------
 
             $(document).ready(function (e) {
+
+//                alert(uname);
+                pageProtect();
 
                 $("#uploadimage").on('submit', (function (e) {
                     e.preventDefault();
@@ -274,34 +281,36 @@ session_start();
                         }
                     });
                 }));
-                
+
                 ///////////////////////////////////////////////////////////////////
 //                datepicker
-     $("#datetimepicker1").datepicker({
+                $("#datetimepicker1").datepicker({
                     format: "yyyy-mm-dd",
                     autoclose: true,
                     todayBtn: true,
                     pickerPosition: "bottom-left"
                 });
-            
 
- //----------------------enter press---------------------------------------------
-            $(".form-control").keyup(function (event) {
-                if (event.keyCode == 13) {
-                    textboxes = $("input.form-control");
-                    currentBoxNumber = textboxes.index(this);
-                    if (textboxes[currentBoxNumber + 1] != null) {
-                        nextBox = textboxes[currentBoxNumber + 1];
-                        nextBox.focus();
-                        nextBox.select();
+
+//----------------------enter press---------------------------------------------
+                $(".form-control").keyup(function (event) {
+                    if (event.keyCode == 13) {
+                        textboxes = $("input.form-control");
+                        currentBoxNumber = textboxes.index(this);
+                        if (textboxes[currentBoxNumber + 1] != null) {
+                            nextBox = textboxes[currentBoxNumber + 1];
+
+                            nextBox.focus();
+                            nextBox.select();
+                        }
+                        event.preventDefault();
+                        return false;
                     }
-                    event.preventDefault();
-                    return false;
-                }
-            });
+                });
 // -----------------------Function to preview image after validation------------                      
-        $(function () {           
-        $("#file").change(function () {
+                $(function () {
+                    $("#file").change(function () {
+
                         $("#message").empty(); // To remove the previous error message
                         var file = this.files[0];
                         var imagefile = file.type;
@@ -318,10 +327,13 @@ session_start();
                             reader.onload = imageIsLoaded;
                             reader.readAsDataURL(this.files[0]);
 
+                            var filename = this.files[0].name;
+                            $('#select').val(filename);
                         }
                     });
                 });
                 function imageIsLoaded(e) {
+
                     $("#file").css("color", "green");
                     $('.row').css("display", "block");
                     $('#previewing').attr('src', e.target.result);
@@ -335,14 +347,14 @@ session_start();
 //-----------------photo upload + add data----------------------------------------------
 
         function upload() {
- var currentdate = new Date();
+            var currentdate = new Date();
             var datetime = +currentdate.getFullYear() + "-"
                     + (currentdate.getMonth() + 1) + "-"
                     + currentdate.getDate() + " "
                     + currentdate.getHours() + ":"
                     + currentdate.getMinutes() + ":"
                     + currentdate.getSeconds();
-            
+
             var upld = document.getElementById('file')
             var fname = $("#fname").val();
             var memno = $("#memno").val();
@@ -353,50 +365,50 @@ session_start();
             var dojoname = $("#dojoname").val();
             var Grade = $("#Grade").val();
             var status = $("#status").val();
-            
-               if (fname == "" || memno == "" || street1 == "" || street2 == "" || City == "" || DOB == "" || dojoname == "" || Grade == "" || status == "")
+
+            if (fname == "" || memno == "" || street1 == "" || street2 == "" || City == "" || DOB == "" || dojoname == "" || Grade == "" || status == "")
+            {
+                if (fname == "")
                 {
-                    if (fname == "")
-                    {
-                        $("#fname").css('border-color', 'red');
-                    }
-                    if (memno == "")
-                    {
-                        $("#memno").css('border-color', 'red');
-                    }
-                    if (street1 == "")
-                    {
-                        $("#street1").css('border-color', 'red');
-                    }
-                    if (street2 == "")
-                    {
-                        $("#street2").css('border-color', 'red');
-                    }
-                    if (City == "")
-                    {
-                        $("#City").css('border-color', 'red');
-                    }
-                    if (DOB == "")
-                    {
-                        $("#DOB").css('border-color', 'red');
-                    }
-                    if (dojoname == "")
-                    {
-                        $("#dojoname").css('border-color', 'red');
-                    }
-                    if (Grade == "")
-                    {
-                        $("#Grade").css('border-color', 'red');
-                    }
-                    
-                    if (status == "")
-                    {
-                        $("#status").css('border-color', 'red');
-                    }
+                    $("#fname").css('border-color', 'red');
                 }
-                
-            
-            
+                if (memno == "")
+                {
+                    $("#memno").css('border-color', 'red');
+                }
+                if (street1 == "")
+                {
+                    $("#street1").css('border-color', 'red');
+                }
+                if (street2 == "")
+                {
+                    $("#street2").css('border-color', 'red');
+                }
+                if (City == "")
+                {
+                    $("#City").css('border-color', 'red');
+                }
+                if (DOB == "")
+                {
+                    $("#DOB").css('border-color', 'red');
+                }
+                if (dojoname == "")
+                {
+                    $("#dojoname").css('border-color', 'red');
+                }
+                if (Grade == "")
+                {
+                    $("#Grade").css('border-color', 'red');
+                }
+
+                if (status == "")
+                {
+                    $("#status").css('border-color', 'red');
+                }
+            }
+
+
+
             if (upld.files.length > 0) {
                 //alert('ok');
 
@@ -429,7 +441,7 @@ session_start();
                             var status = parseInt(res);
                             if (status == 0) {
                                 alertify.success('succesfully Data saved', 1000);
-                                 getcat();
+                                getcat();
                                 clear();
                             }
                             else {
@@ -441,52 +453,100 @@ session_start();
 
 
             } else {
-                alert('no image');
+                //alert('no image');
+                swal({title: "Error!", text: "Choose a profile picture!", type: "error", confirmButtonText: "Ok"});
             }
         }
 
-$('#add').click(function(e){
-    upload();
-                                   
-});
 
 
- //-------------------------text field color change------------------------------
-            $('#fname').on('keyup', function () {
-                $('#fname').css({'border-color': ' #ccc'});
+//--------------------------add data to log table---------------------------------------
+
+        function logdata() {
+
+            var fname = $("#fname").val();
+            var uname = $('#huname').val();
+            var des = fname + " Registerd";
+            var currentdate = new Date();
+            var datetime = +currentdate.getFullYear() + "-"
+                    + (currentdate.getMonth() + 1) + "-"
+                    + currentdate.getDate() + " "
+                    + currentdate.getHours() + ":"
+                    + currentdate.getMinutes() + ":"
+                    + currentdate.getSeconds();
+
+
+            $.ajax({
+                type: 'POST',
+                datatype: 'JSON',
+                url: "EmpReg.php",
+                data: {logadd: 'logadd', datetime: datetime, des: des, uname: uname},
+                success: function (data) {
+
+                    //getstudent();
+                    //clear()
+                    if (data == "1") {
+                        //alert("succes");
+                        alertify.success("save to log", 1000);
+//                        getcat();
+//                        upload();
+//                        //alertify.success("Success log message");
+//                        clear();
+//
+                    } else {
+                        // alertify.error("Error Occured in log", 1000);
+//                        //alertify.error("Error log message");
+//                        //alert("fail")
+                    }
+                }
             });
+//
+        }
 
-            $('#memno ').on('keyup', function () {
-                $('#memno ').css({'border-color': ' #ccc'});
-            });
 
-            $('#street1 ').on('keyup', function () {
-                $('#street1 ').css({'border-color': ' #ccc'});
-            });
+        $('#add').click(function (e) {
+            upload();
+            logdata();
 
-            $('#street2 ').on('keyup', function () {
-                $('#street2 ').css({'border-color': ' #ccc'});
-            });
+        });
 
-            $('#City ').on('keyup', function () {
-                $('#City ').css({'border-color': ' #ccc'});
-            });
 
-            $('#DOB ').on('keyup', function () {
-                $('#DOB ').css({'border-color': ' #ccc'});
-            });
+        //-------------------------text field color change------------------------------
+        $('#fname').on('keyup', function () {
+            $('#fname').css({'border-color': ' #ccc'});
+        });
 
-            $('#dojoname ').on('keyup', function () {
-                $('#dojoname ').css({'border-color': ' #ccc'});
-            });
+        $('#memno ').on('keyup', function () {
+            $('#memno ').css({'border-color': ' #ccc'});
+        });
 
-            $('#Grade ').on('keyup', function () {
-                $('#Grade ').css({'border-color': ' #ccc'});
-            });
+        $('#street1 ').on('keyup', function () {
+            $('#street1 ').css({'border-color': ' #ccc'});
+        });
 
-            $('#status').on('keyup' , function () {
-                $('#status').css({'border-color': ' #ccc'});
-            });
+        $('#street2 ').on('keyup', function () {
+            $('#street2 ').css({'border-color': ' #ccc'});
+        });
+
+        $('#City ').on('keyup', function () {
+            $('#City ').css({'border-color': ' #ccc'});
+        });
+
+        $('#DOB ').on('keyup', function () {
+            $('#DOB ').css({'border-color': ' #ccc'});
+        });
+
+        $('#dojoname ').on('keyup', function () {
+            $('#dojoname ').css({'border-color': ' #ccc'});
+        });
+
+        $('#Grade ').on('keyup', function () {
+            $('#Grade ').css({'border-color': ' #ccc'});
+        });
+
+        $('#status').on('keyup', function () {
+            $('#status').css({'border-color': ' #ccc'});
+        });
 //        $("#add1").click(function () {
 //
 //            var fname = $("#fname").val();
@@ -541,17 +601,17 @@ $('#add').click(function(e){
 //            });
 //
 //        });
-        
-        function updatelog(id){
-           console.log(id)
-            
-        }
+
+//        function updatelog(id) {
+//            console.log(id)
+//
+//        }
 
 //----------------update poto + data------------------------------------------
-      function update() {
-          
-          
- var currentdate = new Date();
+        function update() {
+//alert("update function");
+
+            var currentdate = new Date();
             var uptime = +currentdate.getFullYear() + "-"
                     + (currentdate.getMonth() + 1) + "-"
                     + currentdate.getDate() + " "
@@ -576,7 +636,8 @@ $('#add').click(function(e){
                 if (window.FormData) {
 
                     formdata = new FormData();
-                    formdata.append('id',id);
+                    formdata.append('id', id);
+                    formdata.append('upimg', 'upimg');
                     formdata.append('file_upload', 'file_upload');
                     formdata.append('fname', fname);
                     formdata.append('memno', memno);
@@ -589,6 +650,7 @@ $('#add').click(function(e){
                     formdata.append('status', status);
                     formdata.append('uptime', uptime);
                     formdata.append('file', upld.files[0]);
+                    // (upld.files.length > 0);
 
 
                     $.ajax({
@@ -601,18 +663,21 @@ $('#add').click(function(e){
 
                             var status = parseInt(res);
                             if (status == 0) {
-                                updatelog(id);
-                                
+//                                updatelog(id);
+                                logup();
                                 alertify.success('succesfully Data Updated', 1000);
-                                
-                                 getcat();
-                                 clear();
-                                
+
+                                getcat();
+                                clear();
+
+                                $("#up").hide();
+                                $('#add').show();
+
                             }
-                            else if(status == 800){
- alertify.error('file type error', 1000);
-  var image =$("#previewing").attr("src","img/image.png")
-$("#previewing").attr("title","img/image.png")
+                            else if (status == 800) {
+                                alertify.error('file type error', 1000);
+                                var image = $("#previewing").attr("src", "img/image.png")
+                                $("#previewing").attr("title", "img/image.png")
                             }
                         }
                     });
@@ -620,16 +685,114 @@ $("#previewing").attr("title","img/image.png")
 
 
             } else {
+                //alert("NO IMAGE");
+                var formdata;
+                if (window.FormData) {
+
+                    formdata = new FormData();
+                    formdata.append('id', id);
+                    formdata.append('noimage', 'upimg');
+                    formdata.append('file_upload', 'file_upload');
+                    formdata.append('fname', fname);
+                    formdata.append('memno', memno);
+                    formdata.append('street1', street1);
+                    formdata.append('street2', street2);
+                    formdata.append('City', City);
+                    formdata.append('DOB', DOB);
+                    formdata.append('dojoname', dojoname);
+                    formdata.append('Grade', Grade);
+                    formdata.append('status', status);
+                    formdata.append('uptime', uptime);
+                    formdata.append('file', upld.files[0]);
+                    // (upld.files.length > 0);
+
+
+                    $.ajax({
+                        url: 'imageupdateinfo.php',
+                        type: 'POST',
+                        data: formdata,
+                        processData: false,
+                        contentType: false,
+                        success: function (res) {
+
+                            var status = parseInt(res);
+                            if (status == 0) {
+//                                updatelog(id);
+                                logup();
+                                alertify.success('succesfully Data Updated No imge', 1000);
+
+                                getcat();
+
+                                clear();
+
+                                $("#up").hide();
+                                $('#add').show();
+
+                            }
+                            else if (status == 800) {
+                                alertify.error('file type error', 1000);
+                                var image = $("#previewing").attr("src", "img/image.png")
+                                $("#previewing").attr("title", "img/image.png")
+                            }
+                        }
+                    });
+                }
+
+
 //                alert('no image');
-               swal({   title: "Error!",   text: "Here's my error message!",   type: "error",   confirmButtonText: "Cool" });
+//                swal({title: "Error!", text: "Choose a profile picture!", type: "error", confirmButtonText: "Ok"});
+//$("#selc").html("selct an Image");
             }
         }
 
-$("#up").click(function () {
-    
-  update();  
-    
-});
+//------------------------------------add update data to log---------------------------------
+        function logup() {
+
+            var fname = $("#fname").val();
+            var des = fname + " Updated";
+            var currentdate = new Date();
+            var datetime = +currentdate.getFullYear() + "-"
+                    + (currentdate.getMonth() + 1) + "-"
+                    + currentdate.getDate() + " "
+                    + currentdate.getHours() + ":"
+                    + currentdate.getMinutes() + ":"
+                    + currentdate.getSeconds();
+
+
+            $.ajax({
+                type: 'POST',
+                datatype: 'JSON',
+                url: "EmpReg.php",
+                data: {logup: 'logup', datetime: datetime, des: des},
+                success: function (data) {
+
+                    //getstudent();
+                    //clear()
+                    if (data == "1") {
+                        //alert("succes");
+                        alertify.success("save to log", 1000);
+                        clear();
+//                        getcat();
+//                        upload();
+//                        //alertify.success("Success log message");
+//                        clear();
+//
+                    } else {
+                        alertify.error("Error Occured in log", 1000);
+//                        //alertify.error("Error log message");
+//                        //alert("fail")
+                    }
+                }
+            });
+//
+        }
+
+        $("#up").click(function () {
+
+            update();
+            // logup();
+
+        });
 
 //-------------------------------------------------update-----------------------
 //        $("#up2").click(function () {
@@ -703,14 +866,20 @@ $("#up").click(function () {
                         $("#fname").val(data.name_with_initials);
                         $("#memno").val(data.membership_no);
                         $("#street1").val(data.street_line1);
-                        //var comPassword = $("#comPassword").val("");
                         $("#street2").val(data.street_line2);
                         $("#City").val(data.city);
                         $("#DOB").val(data.date_of_birth);
                         $("#dojoname").val(data.name_of_dojo);
                         $("#Grade").val(data.grade);
                         $("#status").val(data.status);
-                        $("#previewing").attr("src",data.image);
+                        $("#previewing").attr("src", data.image);
+//                        $("#file").val(data.image);
+                        var data1 = data.image;
+//                        alert(data1)
+                        var arr = data1.split('/');
+//                        $("#select").html("<span>" + arr[2]);
+                        $("#select").val(arr[2]);
+
                         if (data.status == 1) {
                             //                                alert(data.status) 
                             $('#status').val(1);
@@ -783,17 +952,17 @@ $("#up").click(function () {
 
         function clear() {
 
-           var fname = $("#fname").val("");
-            var memno = $("#memno").val("");
-            var street1 = $("#street1").val("");
-            var street2 = $("#street2").val("");
-            var City = $("#City").val("");
-            var DOB = $("#DOB").val("");
-            var dojoname = $("#dojoname").val("");
-            var Grade = $("#Grade").val("");
-            var status = $("#status").val("");
-            var image =$("#previewing").attr("src","img/image.png");
-
+            $("#fname").val("");
+            $("#memno").val("");
+            $("#street1").val("");
+            $("#street2").val("");
+            $("#City").val("");
+            $("#DOB").val("");
+            $("#dojoname").val("");
+            $("#Grade").val("");
+            $("#status").val("");
+            $("#previewing").attr("src", "img/image.png");
+            $("#file").val("");
         }
         //------------------------log out------------------------------------------------
 

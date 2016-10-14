@@ -17,7 +17,7 @@ if (array_key_exists("comadd", $_POST)) {
 //    echo '"dfdfdfd"'.$name;
 //    
 //    
-    $query = "INSERT INTO competition (student_id,name_of_competition,competition_date,grade,palce,status) VALUES ('{$studid} ',' {$comname} ',' {$date} ','{$comgrade} ',' {$place} ','{$comstatus} ')";
+    $query = "INSERT INTO competition (student_id,name_of_competition,competition_date,grade,palce,status) VALUES ('{$studid}','{$comname}','{$date}','{$comgrade}','{$place}','{$comstatus}')";
 
     $result=  mysqli_query($con,$query)or die(mysqli_error());
    

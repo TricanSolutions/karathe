@@ -1,8 +1,9 @@
 <?php
 include './connection.php';
 //---------- update poto + data---------------------------------
-
-//$fname = $_POST['username'];
+if (array_key_exists("upimg", $_POST)){
+    
+    //$fname = $_POST['username'];
 $id = $_POST['id'];
 $fname = $_POST['fname'];
 $memno = $_POST['memno'];
@@ -15,6 +16,7 @@ $Grade = $_POST['Grade'];
 $status = $_POST['status'];
 $uptime = $_POST['uptime'];
 
+//print_r($_POST);
 //echo $name;.
 $uploaddir = './imgg';
 $filetype = $_FILES['file']['type'];
@@ -63,4 +65,38 @@ if ($filetype == 'image/jpeg') {
 } else {
     echo json_encode(800); //type not eqiua;l
 }
+    
+}
+if (array_key_exists("noimage", $_POST)){
+    
+//    echo 'no image ok';
+        $id = $_POST['id'];
+    $sql5 = "UPDATE student
+            SET 
+            name_with_initials = '{$_POST['fname']}',
+            membership_no = '{$_POST['memno']}',
+            street_line1 = '{$_POST['street1']}',
+            street_line2 = '{$_POST['street2']}',
+            city = '{$_POST['City']}',
+            name_of_dojo = '{$_POST['dojoname']}',
+            date_of_birth='{$_POST['DOB']}',
+            grade = '{$_POST['Grade']}',
+            update_time = '{$_POST['uptime']}',
+            status = '{$_POST['status']}'
+            WHERE id='$id'";
+            
+            
+// alert (grade);
+    $result = mysqli_query($con, $sql5)or die(mysqli_error());
+    //echo 'sssssssssssssssssssss';
+   // echo grade;
+    if ($result) {
+        echo json_encode(0);
+    } else {
+
+         echo json_encode(1); //query error
+    }
+    
+}
+
 ?>

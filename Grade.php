@@ -45,7 +45,7 @@ session_start();
                                                         </div>-->
 
                             <div class="form-group">
-                                <label class="control-label col-sm-3" for="Grade">Grade:&nbsp;&nbsp;</label>
+                                <label class="control-label col-sm-3" for="Grade1">Grade:&nbsp;&nbsp;</label>
                                 <div class="col-sm-5">
                                     <select class="form-control" id="Grade" >
                                         <option value="99">------Select Grade------</option>
@@ -89,8 +89,8 @@ session_start();
                                     </div>
                                 </div>
                             </div>
-                            
-                                      
+
+
 
 
 
@@ -174,7 +174,7 @@ session_start();
                                             <th>Result</th>
                                             <th>Examiner</th>
                                             <th>Status</th>
-                                            <th>Edit / Delete</th>
+                                            <th>Edit</th>
                                         </tr>
                                     </thead>
                                     <tbody>                                                             
@@ -185,8 +185,8 @@ session_start();
                         </div>
                     </div>
                 </div>
-                
-                
+
+
             </div>
 
         </div>
@@ -213,25 +213,72 @@ session_start();
                 // $('#datetimepicker1').datetimepicker();
 
                 // $("#input-4").fileinput({showCaption: false});
-                
+
                 ///////////////////////////////////////////////////////////////////
 //                datepicker
-     $("#tdate").datepicker({
+                $("#tdate").datepicker({
                     format: "yyyy-mm-dd",
                     autoclose: true,
                     todayBtn: true,
                     pickerPosition: "bottom-left"
                 });
+
+
+
+
+                //----------------------enter press---------------------------------------------
+                $(".form-control").keyup(function (event) {
+                    if (event.keyCode == 13) {
+                        textboxes = $("input.form-control");
+                        currentBoxNumber = textboxes.index(this);
+                        if (textboxes[currentBoxNumber + 1] != null) {
+                            nextBox = textboxes[currentBoxNumber + 1];
+                            nextBox.focus();
+                            nextBox.select();
+                        }
+                        event.preventDefault();
+                        return false;
+                    }
+                });
             });
 //-----------------------------add---------------------------------------------                   
             $("#gradeadd").click(function () {
-                
+
                 var studid = $("#studid").val();
                 var Grade = $("#Grade").val();
                 var tdate = $("#tdate").val();
                 var Result = $("#Result").val();
                 var Examiner = $("#Examiner").val();
                 var status = $("#status").val();
+
+ if (studid == "" || Grade == "" || tdate == "" || Result == "" || Examiner == "" || status == "")
+            {
+                if (studid == "")
+                {
+                    $("#studid").css('border-color', 'red');
+                }
+                if (Grade == "")
+                {
+                    $("#Grade").css('border-color', 'red');
+                }
+                if (tdate == "")
+                {
+                    $("#tdate").css('border-color', 'red');
+                }
+                if (Result == "")
+                {
+                    $("#Result").css('border-color', 'red');
+                }
+                if (Examiner == "")
+                {
+                    $("#Examiner").css('border-color', 'red');
+                }
+                             
+                if (status == "")
+                {
+                    $("#status").css('border-color', 'red');
+                }
+            }
 
                 $.ajax({
                     type: 'POST',
@@ -337,7 +384,7 @@ session_start();
                     success: function (data) {
 
                         $('input[type=text]').val('');
-                       // getgrade();
+                        // getgrade();
                         //clear()
                         if (data == "1") {
                             //alert("succes");
@@ -345,6 +392,9 @@ session_start();
                             getgrade();
                             //alertify.success("Success log message");
                             clear();
+                            $("#gradeup").hide();
+                            $("#gradeadd").show();
+
                         } else {
                             alertify.error("Error Occured", 1000);
                             //alertify.error("Error log message");

@@ -65,7 +65,7 @@ session_start();
                             <!-- <div class="container">
                                 <div class="row">
                                     <div class='col-sm-6'>-->
-                           <div class="form-group">
+                            <div class="form-group">
                                 <label class="control-label col-sm-3" for="tdate">Competition Date:&nbsp;&nbsp;</label>
                                 <div class="col-sm-5">
                                     <div  class='input-group date' >
@@ -78,12 +78,12 @@ session_start();
                             </div>
 
 
-                                    <!--                                        <div  class='input-group date' id='date'>
-                                                                                <input  type='text' class="form-control" id="date"/>
-                                                                                <span class="input-group-addon">
-                                                                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                                                </span>
-                         <!--</div>-->
+                            <!--                                        <div  class='input-group date' id='date'>
+                                                                        <input  type='text' class="form-control" id="date"/>
+                                                                        <span class="input-group-addon">
+                                                                            <span class="glyphicon glyphicon-calendar"></span>
+                                                                        </span>
+                            <!--</div>-->
                             <!--</div>-->
 
 
@@ -206,20 +206,30 @@ session_start();
                 // $("#input-4").fileinput({showCaption: false});
 
 
-
-
-
-
-                
-            });
-            
-            $("#tdate").datepicker({
-                    format: "yyyy-mm-dd",
-                    autoclose: true,
-                    todayBtn: true,
-                    pickerPosition: "bottom-left"
+//----------------------enter press---------------------------------------------
+                $(".form-control").keyup(function (event) {
+                    if (event.keyCode == 13) {
+                        textboxes = $("input.form-control");
+                        currentBoxNumber = textboxes.index(this);
+                        if (textboxes[currentBoxNumber + 1] != null) {
+                            nextBox = textboxes[currentBoxNumber + 1];
+                      
+                            nextBox.focus();
+                            nextBox.select();
+                        }
+                        event.preventDefault();
+                        return false;
+                    }
                 });
-            
+            });
+
+            $("#tdate").datepicker({
+                format: "yyyy-mm-dd",
+                autoclose: true,
+                todayBtn: true,
+                pickerPosition: "bottom-left"
+            });
+
             $("#comadd").click(function () {
 
                 var studid = $("#studid").val();
@@ -259,30 +269,7 @@ session_start();
 
             });
 
-            //----------------image load---------------------------------------------
-
-
-            // var btnCust = '<button type="button" class="btn btn-default" title="Add picture tags" ' + 
-            //    'onclick="alert(\'Call your custom code here.\')">' +
-            //    '<i class="glyphicon glyphicon-tag"></i>' +
-            //    '</button>'; 
-            //$("#avatar-1").fileinput({
-            //    overwriteInitial: true,
-            //    maxFileSize: 1500,
-            //    showClose: false,
-            //    showCaption: false,
-            //    browseLabel: '',
-            //    removeLabel: '',
-            //    browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
-            //    removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
-            //    removeTitle: 'Cancel or reset changes',
-            //    elErrorContainer: '#kv-avatar-errors-1',
-            //    msgErrorClass: 'alert alert-block alert-danger',
-            //    defaultPreviewContent: '<img src="/uploads/default_avatar_male.jpg" alt="Your Avatar" style="width:160px">',
-            //    layoutTemplates: {main2: '{preview} ' +  btnCust + ' {remove} {browse}'},
-            //    allowedFileExtensions: ["jpg", "png", "gif"]
-            //});
-
+    
 
             //---------------edit button---------------------------------------------------
             function edit(id) {
@@ -299,7 +286,7 @@ session_start();
                             $("#sid").val(data.id);
                             $("#studid").val(data.student_id);
                             $("#comname").val(data.name_of_competition);
-                             $("#tdate").val(data.competition_date);
+                            $("#tdate").val(data.competition_date);
                             $("#comgrade").val(data.grade);
                             $("#place").val(data.palce);
                             $("#comstatus").val(data.status);
@@ -399,12 +386,12 @@ session_start();
 
             function clear() {
 
-                var studid = $("#studid").val("");
-                var comname = $("#comname").val("");
-                var date = $("#date").val("");
-                var comgrade = $("#comgrade").val("");
-                var place = $("#place").val("");
-                var comstatus = $("#comstatus").val("");
+                $("#studid").val("");
+                $("#comname").val("");
+                $("#date").val("");
+                $("#comgrade").val("");
+                $("#place").val("");
+                $("#comstatus").val("");
 
             }
 

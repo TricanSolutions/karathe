@@ -30,8 +30,13 @@
 
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="#"> <?php echo $_SESSION['name']; ?></a></li>
-                            <li class="active pull-right" style="padding-right: 10px;">
-                                <a href="#" class="btn btn-danger" id="logout" style=""><i class="fa fa-lg fa-sign-out"></i>Logout</a></li>
+                            <input type="hidden" id="huname" value="<?php echo $_SESSION['name']; ?>">
+                            <li class="active pull-right" style="padding-right: 10px; ">
+                                <a href="#" class="btn btn-danger btn-sm" id="logout" style="">
+                                    <!--<i class="fa fa-lg fa-sign-out"></i>-->
+                                    <span class="glyphicon glyphicon-log-out"></span>
+                                    Logout</a>
+                            </li>
                            
                             <!--<li> <a href="login.html" data-toggle="tooltip" data-original-title="Logout" data-placement="bottom" class="btn btn-metis-1 btn-sm">-->
                                         <!--<i class="fa fa-power-off"></i>  </a></li>-->
@@ -48,14 +53,20 @@
                                 </ul>
                             </li>-->
                         </ul>
+<!--                        <div>
                                                 <form class="navbar-form navbar-left" role="search">
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Search">
                             </div>
                             <button type="submit" class="btn btn-default">Submit</button>
                         </form>
-                    </div><!-- /.navbar-collapse -->
-                </div><!-- /.container-fluid -->
+                    </div>-->
+                        <!-- /.navbar-collapse -->
+                </div>
+                  </div>  
+                    
+                    
+                    <!-- /.container-fluid -->
             </nav>
             <!-- End /nav -->
             

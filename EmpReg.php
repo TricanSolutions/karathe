@@ -1,7 +1,8 @@
 <?php
 
 include './connection.php';
-
+  session_start();
+//  $uu=$_SESSION['name'];
 if (array_key_exists("studadd", $_POST)) {
 //    print_r($_POST);
     //$id = $_POST['id'];
@@ -37,6 +38,79 @@ if (array_key_exists("studadd", $_POST)) {
    // $query = "INSERT INTO register (first,last,pass,confirmpass,tp,nic,basic_salory,education_qualifications,
     }
 }
+ 
+//----------------------------up data to log table--------------------------------
+if (array_key_exists("logup", $_POST)) {
+    
+  
+//    print_r($_POST);
+    //$id = $_POST['id'];
+    //print_r($_POST);
+   
+    $datetime=$_POST['datetime'];
+    $des = $_POST['des'];
+    $uu=$_SESSION['name'];
+    
+    echo $_SESSION['name'];
+//    print_r($_POST);
+    
+//    echo $status;
+//    echo '"dfdfdfd"'.$name;
+//    
+//    
+    $query9 = "INSERT INTO log (date,description,user) VALUES ('{$datetime} ',' {$des} ',' {$uu} ')";
+//    $result=  mysqli_query($con,$query);
+    $result9 = mysqli_query($con,$query9);
+   // echo 'fhsdfb';
+    if ($result9) {
+        echo 1;
+
+    } else {
+        
+        echo 0;
+//    
+   // $query = "INSERT INTO register (first,last,pass,confirmpass,tp,nic,basic_salory,education_qualifications,
+    }
+}
+
+
+//----------------------------add data to log table--------------------------------
+if (array_key_exists("logadd", $_POST)) {
+//    print_r($_POST);
+    //$id = $_POST['id'];
+    //print_r($_POST);
+      
+
+   
+    $datetime=$_POST['datetime'];
+    $des = $_POST['des'];
+    //$uu=$_SESSION['name'];
+//    print_r($_POST);
+   
+    $name = $_SESSION['name'];
+//    echo $status;
+//    echo '"dfdfdfd"'.$name;
+//    
+//    
+    $query10 = "INSERT INTO log (date,description) VALUES ('{$datetime} ',' {$des} ',' {$name} ')";
+//    $result=  mysqli_query($con,$query);
+    $result10 = mysqli_query($con,$query10);
+//            /or die(mysqli_error())
+   // echo 'fhsdfb';
+    if ($result10) {
+        echo 1;
+
+    } else {
+        
+        echo 0;
+//    
+   // $query = "INSERT INTO register (first,last,pass,confirmpass,tp,nic,basic_salory,education_qualifications,
+    }
+}
+
+
+
+
 //-----------------------------update--------------------------------------------------
 
 if (array_key_exists("studup", $_POST)) {
@@ -58,7 +132,7 @@ if (array_key_exists("studup", $_POST)) {
             
             
 // alert (grade);
-    $result = mysqli_query($con, $sql5);
+    $result = mysqli_query($con, $sql5)or die(mysqli_error());
     //echo 'sssssssssssssssssssss';
    // echo grade;
     if ($result) {
@@ -167,7 +241,7 @@ user.name ='{$uname}'LIMIT 1";
             foreach ($result as $ud) {
                 if ($ud['password'] == $Password) {
 
-                    session_start();
+                    //session_start();
                     
                     $_SESSION['userid']=$ud['id'];
                     $_SESSION['name']=$ud['name'];

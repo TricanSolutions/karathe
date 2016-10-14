@@ -13,7 +13,7 @@ if (array_key_exists("gradeadd", $_POST)) {
     $status = $_POST['status'];
 
 
-    $query = "INSERT INTO gradings (student_id,grade,tested_on,result,examiner,status) VALUES ('{$studid} ',' {$Grade} ','{$tdate}',' {$Result} ',' {$Examiner} ','{$status} ')";
+    $query = "INSERT INTO gradings (student_id,grade,tested_on,result,examiner,status) VALUES ('{$studid}','{$Grade}','{$tdate}','{$Result}','{$Examiner}','{$status}')";
 
     $result = mysqli_query($con, $query)or die(mysqli_error());
 
