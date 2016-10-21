@@ -30,7 +30,7 @@ session_start();
                                 <label class="control-label col-sm-3" for="status">Student Name:&nbsp;&nbsp;</label>
                                 <div class="col-sm-5">
                                     <select class="form-control" id="studid">
-
+ <!--<option value="99">------Select Grade------</option>-->
                                     </select>
                                 </div>
                                 <input type="hidden" class="form-control" id="sid" placeholder="" >
@@ -256,6 +256,7 @@ session_start();
                 if (studid == "")
                 {
                     $("#studid").css('border-color', 'red');
+                    
                 }
                 if (Grade == "")
                 {
@@ -268,6 +269,7 @@ session_start();
                 if (Result == "")
                 {
                     $("#Result").css('border-color', 'red');
+                     alertify.error("fill Occured", 1000);
                 }
                 if (Examiner == "")
                 {

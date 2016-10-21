@@ -17,6 +17,7 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                             <li class=""><a href="dashboard.php">Home</a></li>
+                            <li class="" style="color: white; padding-top:15px;">|</li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">File <span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
@@ -25,14 +26,14 @@
                                     <li><a href="competition.php">Competition</a></li>   
                                 </ul>
                             </li>
-                            <li><a href="#">View</a></li>
+                            <!--<li><a href="#">View</a></li>-->
                         </ul>
 
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="#"> <?php echo $_SESSION['name']; ?></a></li>
                             <input type="hidden" id="huname" value="<?php echo $_SESSION['name']; ?>">
                             <li class="active pull-right" style="padding-right: 10px; ">
-                                <a href="#" class="btn btn-danger btn-sm" id="logout" style="">
+                                <a href="#" class="btn btn-danger btn-xs" id="logout" style="">
                                     <!--<i class="fa fa-lg fa-sign-out"></i>-->
                                     <span class="glyphicon glyphicon-log-out"></span>
                                     Logout</a>

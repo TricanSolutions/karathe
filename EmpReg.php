@@ -1,7 +1,7 @@
 <?php
 
 include './connection.php';
-  session_start();
+session_start();
 //  $uu=$_SESSION['name'];
 if (array_key_exists("studadd", $_POST)) {
 //    print_r($_POST);
@@ -15,61 +15,57 @@ if (array_key_exists("studadd", $_POST)) {
     //$dob = $_POST['DOB'];
     $dojoname = $_POST['dojoname'];
     $Grade = $_POST['Grade'];
-    $datetime=$_POST['datetime'];
+    $datetime = $_POST['datetime'];
     $status = $_POST['status'];
 
 //    print_r($_POST);
-    
 //    echo $status;
 //    echo '"dfdfdfd"'.$name;
 //    
 //    
     $query = "INSERT INTO student (name_with_initials,membership_no,street_line1,street_line2,city,name_of_dojo,grade,create_time,status) VALUES ('{$fname} ',' {$memno} ',' {$street1} ',' {$street2} ',' {$City} ',' {$dojoname} ',' {$Grade} ','{$datetime} ', '{$status} ')";
 //    $result=  mysqli_query($con,$query);
-    $result = mysqli_query($con,$query)or die(mysqli_error());
-   // echo 'fhsdfb';
+    $result = mysqli_query($con, $query)or die(mysqli_error());
+    // echo 'fhsdfb';
     if ($result) {
         echo 1;
-
     } else {
-        
+
         echo 0;
 //    
-   // $query = "INSERT INTO register (first,last,pass,confirmpass,tp,nic,basic_salory,education_qualifications,
+        // $query = "INSERT INTO register (first,last,pass,confirmpass,tp,nic,basic_salory,education_qualifications,
     }
 }
- 
+
 //----------------------------up data to log table--------------------------------
 if (array_key_exists("logup", $_POST)) {
-    
-  
+
+
 //    print_r($_POST);
     //$id = $_POST['id'];
     //print_r($_POST);
-   
-    $datetime=$_POST['datetime'];
+
+    $datetime = $_POST['datetime'];
     $des = $_POST['des'];
-    $uu=$_SESSION['name'];
-    
-    echo $_SESSION['name'];
+    $uu = $_SESSION['name'];
+
+    // echo $_SESSION['name'];
 //    print_r($_POST);
-    
 //    echo $status;
 //    echo '"dfdfdfd"'.$name;
 //    
 //    
-    $query9 = "INSERT INTO log (date,description,user) VALUES ('{$datetime} ',' {$des} ',' {$uu} ')";
+    $query9 = "INSERT INTO log (date,description,user) VALUES ('{$datetime}','{$des}','{$uu}')";
 //    $result=  mysqli_query($con,$query);
-    $result9 = mysqli_query($con,$query9);
-   // echo 'fhsdfb';
+    $result9 = mysqli_query($con, $query9);
+    // echo 'fhsdfb';
     if ($result9) {
         echo 1;
-
     } else {
-        
+
         echo 0;
 //    
-   // $query = "INSERT INTO register (first,last,pass,confirmpass,tp,nic,basic_salory,education_qualifications,
+        // $query = "INSERT INTO register (first,last,pass,confirmpass,tp,nic,basic_salory,education_qualifications,
     }
 }
 
@@ -79,32 +75,31 @@ if (array_key_exists("logadd", $_POST)) {
 //    print_r($_POST);
     //$id = $_POST['id'];
     //print_r($_POST);
-      
 
-   
-    $datetime=$_POST['datetime'];
+
+
+    $datetime = $_POST['datetime'];
     $des = $_POST['des'];
     //$uu=$_SESSION['name'];
 //    print_r($_POST);
-   
+
     $name = $_SESSION['name'];
-//    echo $status;
+    echo $name;
 //    echo '"dfdfdfd"'.$name;
 //    
 //    
-    $query10 = "INSERT INTO log (date,description) VALUES ('{$datetime} ',' {$des} ',' {$name} ')";
+    $query10 = "INSERT INTO log (date,description,user) VALUES ('{$datetime}','{$des}','{$name}')";
 //    $result=  mysqli_query($con,$query);
-    $result10 = mysqli_query($con,$query10);
+    $result10 = mysqli_query($con, $query10);
 //            /or die(mysqli_error())
-   // echo 'fhsdfb';
+    // echo 'fhsdfb';
     if ($result10) {
         echo 1;
-
     } else {
-        
+
         echo 0;
 //    
-   // $query = "INSERT INTO register (first,last,pass,confirmpass,tp,nic,basic_salory,education_qualifications,
+        // $query = "INSERT INTO register (first,last,pass,confirmpass,tp,nic,basic_salory,education_qualifications,
     }
 }
 
@@ -129,12 +124,12 @@ if (array_key_exists("studup", $_POST)) {
             update_time = '{$_POST['uptime']}',
             status = '{$_POST['status']}'
             WHERE id='$id'";
-            
-            
+
+
 // alert (grade);
     $result = mysqli_query($con, $sql5)or die(mysqli_error());
     //echo 'sssssssssssssssssssss';
-   // echo grade;
+    // echo grade;
     if ($result) {
         echo 1;
     } else {
@@ -144,23 +139,23 @@ if (array_key_exists("studup", $_POST)) {
 }
 //-----------------------load table---------------------------------------------
 if (array_key_exists("loadstud", $_POST)) {
-    
+
     $query = "SELECT * FROM student";
 
     foreach ($con->query($query)as $row) {
-        echo "<tr><td>" . $row['id'] . "</td><td>" . $row['name_with_initials'] . "</td><td>" . $row['membership_no'] . "</td><td>" . $row['name_of_dojo'] . "</td><td>" . $row['create_time'] ."</td><td>".$row['update_time']. "</td><td>" . $row['status'] . "</td><td>
-           <input type='button'class='btn btn-info btn-xs col-sm-9' value='Edit' onClick='edit(" . $row['id'] . ")'>";    
+        echo "<tr><td>" . $row['id'] . "</td><td>" . $row['name_with_initials'] . "</td><td>" . $row['membership_no'] . "</td><td>" . $row['name_of_dojo'] . "</td><td>" . $row['create_time'] . "</td><td>" . $row['update_time'] . "</td><td>" . $row['status'] . "</td><td>
+           <input type='button'class='btn btn-info btn-xs col-sm-9' value='Edit' onClick='edit(" . $row['id'] . ")'>";
 
-        
+
 //        <td>" . $row['street_line1'] . "</td><td>" . $row['street_line2'] . "</td><td>" . $row['city'] . "</td><td>" . $row['grade'] . "</td>
     }
 }
 //------------------fil txtbox by edit btn---------------------------------------
 if (array_key_exists("fill", $_POST)) {
-   
+
     $id = $_POST['id'];
 
-$query = "SELECT
+    $query = "SELECT
 student.id,
 student.name_with_initials,
 student.membership_no,
@@ -179,17 +174,16 @@ student.id ='{$id}'";
 
 //    foreach ($con->query($query)as $row) {
 
-$data = array();
-$result = $con->query($query);
+    $data = array();
+    $result = $con->query($query);
 
 
- while ($row = mysqli_fetch_assoc($result)) {
-            $data[] = $row;
-        }
-        echo json_encode($data);
-    
-   }
-   //------------------delete------------------------------------------------
+    while ($row = mysqli_fetch_assoc($result)) {
+        $data[] = $row;
+    }
+    echo json_encode($data);
+}
+//------------------delete------------------------------------------------
 if (array_key_exists("del", $_POST)) {
 
     $id = $_POST['id'];
@@ -204,8 +198,8 @@ if (array_key_exists("del", $_POST)) {
         echo 0;
     }
 }
-   //----------------LOGGING-----------------------------
- //---------------------logging--------------------------------------------------
+//----------------LOGGING-----------------------------
+//---------------------logging--------------------------------------------------
 if (array_key_exists("logsystem", $_POST)) {
 
     if (isset($_POST['usname']) && !empty($_POST['usname']) && isset($_POST['password']) && !empty($_POST['password'])) {
@@ -242,21 +236,24 @@ user.name ='{$uname}'LIMIT 1";
                 if ($ud['password'] == $Password) {
 
                     //session_start();
-                    
-                    $_SESSION['userid']=$ud['id'];
-                    $_SESSION['name']=$ud['name'];
-                    
-                    $_SESSION['HTTP_USER_AGENT']=  md5($_SERVER['HTTP_USER_AGENT']);
-                    
+
+                    $_SESSION['userid'] = $ud['id'];
+                    $_SESSION['name'] = $ud['name'];
+
+                    $_SESSION['HTTP_USER_AGENT'] = md5($_SERVER['HTTP_USER_AGENT']);
+
                     echo json_encode(array('msgType' => 0, 'msg' => 'succecfully login to system'));
-                } else {
+                } 
+                else {
                     echo json_encode(array('msgType' => 1, 'msg' => 'password incorrect,plese check password'));
                 }
             }
-        } else {
+        } 
+        else {
             echo json_encode(array('msgType' => 2, 'msg' => 'user was not available in the datbase, plese check user name'));
         }
-    } else {
+    } 
+    else {
         echo json_encode(array('msgType' => 3, 'msg' => 'please enter user name or password'));
     }
 };

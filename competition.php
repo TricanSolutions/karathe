@@ -388,7 +388,7 @@ session_start();
 
                 $("#studid").val("");
                 $("#comname").val("");
-                $("#date").val("");
+                $("#tdate").val("");
                 $("#comgrade").val("");
                 $("#place").val("");
                 $("#comstatus").val("");

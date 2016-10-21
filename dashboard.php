@@ -112,28 +112,7 @@ session_start();
         <div id="wrapper">
             <div class="container">
                
-<!--                <a href="Register.php" class="">
-                                           <div class="col-md-3">
-                                             <div class="thumbnail" style="">
-                                                 <img src="img/dashbord/usermanege.png" style="width:100px; height:100px">
-                                              <div class="caption text-center" style="margin-top:-20px; ">
-                                              <h3></h3>
-                                                  <p></p>
-                                                 </div>
-                                                  </div>
-                                                 </div>
-                                              </a>
-<a href="" class="">
-                                           <div class="col-md-3">
-                                             <div class="thumbnail" style="">
-                                                 <img src="img/dashbord/usermanege.png" style="width:100px; height:100px ">
-                                              <div class="caption text-center" style="margin-top:-20px; ">
-                                              <h3></h3>
-                                                  <p></p>
-                                                 </div>
-                                                  </div>
-                                                 </div>
-                                              </a>-->
+
 
 
           <div class="row col-lg-12 "  >
@@ -151,17 +130,7 @@ session_start();
 
               
               
-<!--              <div class="col-lg-3 ">
-    <div class="hovereffect">
-        <img class="img-responsive" src="img/dashbord/student.png" alt="">
-        <div class="caption text-center">
-           <h2>Hover effect 1v2</h2>
-           <a class="info" href="#">link here</a>
-           <h3  style="font-size: 20pt; font-family:serif ; color: black">Student Registration</h3>
-        </div>
-    </div>
-</div>-->
-                    <a class="" href="Grade.php">
+        <a class="" href="Grade.php">
                         <div class="col-md-4 ">
                             <div class="hovereffect thumbnail" style="background-color: transparent; border:1px black solid; border-radius: 15px;   min-height: 175px; width: 300px;">
                                 <img src="img/dashbord/grade.jpg" style="width:120px; height:120px">
@@ -192,17 +161,7 @@ session_start();
     <!--</div>-->
 </div>
 
-                <!--User Level Add-->
-<!--                <div class="" style="width: 100%;" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">-->
-<!--                    <div class="">
-                        <div class="" style="">-->
-                           
-                            <!--<div class="row">-->
-                               
-                            <!--</div>-->
-<!--                        </div>
-                    </div>-->
-                <!--</div>--> 
+              
 
             </div>
         </div>

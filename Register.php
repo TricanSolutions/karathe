@@ -440,9 +440,11 @@ session_start();
 
                             var status = parseInt(res);
                             if (status == 0) {
+                                logdata();
                                 alertify.success('succesfully Data saved', 1000);
                                 getcat();
                                 clear();
+                                
                             }
                             else {
 
@@ -465,7 +467,7 @@ session_start();
         function logdata() {
 
             var fname = $("#fname").val();
-            var uname = $('#huname').val();
+            //var uname = $('#huname').val();
             var des = fname + " Registerd";
             var currentdate = new Date();
             var datetime = +currentdate.getFullYear() + "-"
@@ -480,12 +482,13 @@ session_start();
                 type: 'POST',
                 datatype: 'JSON',
                 url: "EmpReg.php",
-                data: {logadd: 'logadd', datetime: datetime, des: des, uname: uname},
+                data: {logadd: 'logadd', datetime: datetime, des: des},
                 success: function (data) {
 
                     //getstudent();
                     //clear()
                     if (data == "1") {
+
                         //alert("succes");
                         alertify.success("save to log", 1000);
 //                        getcat();
@@ -506,12 +509,13 @@ session_start();
 
         $('#add').click(function (e) {
             upload();
-            logdata();
+//            logdata();
 
         });
 
 
         //-------------------------text field color change------------------------------
+     
         $('#fname').on('keyup', function () {
             $('#fname').css({'border-color': ' #ccc'});
         });
@@ -547,6 +551,7 @@ session_start();
         $('#status').on('keyup', function () {
             $('#status').css({'border-color': ' #ccc'});
         });
+    
 //        $("#add1").click(function () {
 //
 //            var fname = $("#fname").val();
